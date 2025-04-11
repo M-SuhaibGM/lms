@@ -29,7 +29,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/middleware.js"
-, "src/app/(dashbord)/(routes)/teacher/create/page.js", "src/components/ui/fileUploder.js", "src/app/api/uploadthing/core.js", "src/app/api/uploadthing/route.js", "src/lib/uploadthing.js", "src/app/(dashbord)/_components/UploadImageForm.js"  ],
+, "src/app/(dashbord)/(routes)/teacher/create/page.jsx", "src/components/ui/fileUploder.js", "src/app/api/uploadthing/core.js", "src/app/api/uploadthing/route.js", "src/lib/uploadthing.js", "src/app/(dashbord)/_components/UploadImageForm.jsx", "src/app/(dashbord)/(routes)/search/_component/Catagery.jsx", "hooks/Debounce.jsx", "actions/get-course.ts", "actions/get-chapter.ts", "src/app/api/courses/[courseId]/checkout/route.ts", "src/app/(course)/courses/[courseId]/chapters/[chapterid]/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -10,9 +10,10 @@ export const ourFileRouter = {
       maxFileCount: 1,
     },
   })
-    .onUploadComplete(async ({ metadata, file }) => {
-      console.log("this is test to cheak is onuploadcomplete working", file.url);
+    .onUploadComplete(() => { }),
+  CourseAttachment: f(["image", "pdf", "text", "audio", "video"])
+    .onUploadComplete(() => { }),
+  Coursevideo: f(["video"])
+    .onUploadComplete(() => { }),
 
-      return { url: file.url };
-    }),
 };
