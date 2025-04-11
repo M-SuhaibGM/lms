@@ -1,11 +1,11 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "../../../../../lib/db";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import stripe from "../../../../../lib/stripe";
 
 export async function POST(
-  request: NextRequest,
+  req: Request,
   { params }: { params: { courseId: string } }
 ) {
   try {
@@ -50,7 +50,7 @@ export async function POST(
         price_data: {
           currency: "USD",
           product_data: {
-            name: course.titte || "",
+            name: course.titte,
             description: course.description || "",
           },
           unit_amount: Math.round(course.price * 100),
