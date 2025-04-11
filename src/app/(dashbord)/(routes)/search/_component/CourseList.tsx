@@ -1,4 +1,4 @@
-
+"use client"
 import { Course, Category } from "@prisma/client"
 import CourseCard from "./CourseCard";
 
@@ -19,7 +19,7 @@ export const CourseList = ({
         <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
             {items.map((item) => (
                 <CourseCard key={item.id} id={item.id}
-                    title={item.titte} imageUrl={item.imageUrl} chapterLength={item.chapters.length} price={item.price} progress={item.progress} category={item?.category?.name} />
+                    title={item.titte} imageUrl={item.imageUrl!==null ? item.imageUrl : ""} chapterLength={item.chapters.length} price={item?.price!==null ? item.price : 0} progress={item.progress !== null ? item.progress : 0} category={item?.category?.name || ""} />
             ))}
         </div>
     )

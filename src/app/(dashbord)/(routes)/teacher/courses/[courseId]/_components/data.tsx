@@ -8,6 +8,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
+  SortingState,
 } from "@tanstack/react-table"
 
 import {
@@ -51,6 +52,7 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4 justify-between ">
         <Input
+          type="text"
           placeholder="Filter Courses..."
           value={(table.getColumn("titte")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
@@ -59,19 +61,19 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
         <Link href="/teacher/create">
-          <Button className="cursor-pointer">
+          <Button className="cursor-pointer" variant="default" size="sm">
             <><CirclePlus />Add Course</>
           </Button>
         </Link>
       </div>
       <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+        <Table className="">
+          <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -84,22 +86,23 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className=""
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
-              <TableRow>
+              <TableRow className="">
                 <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
@@ -110,20 +113,22 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
+          className=""
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
           Previous
-        </Button>
         <Button
+          className=""
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
           Next
+        </Button>
         </Button>
       </div>
     </div>

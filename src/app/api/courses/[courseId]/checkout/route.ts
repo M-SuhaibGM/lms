@@ -1,21 +1,30 @@
+// src/app/api/courses/[courseId]/checkout/route.ts
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "../../../../../lib/db";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import stripe from "../../../../../lib/stripe";
 
-export async function POST(
-  request: Request,
-  { params }: { params: { courseId: string } }
-): Promise<NextResponse> {
-  try {
-    const { courseId } = params;
-    const user = await currentUser();
+// Required for dynamic routes
+export const dynamic = "force-dynamic";
 
-    if (!user || !user.id) {
+export async function POST(request: Request): Promise<NextResponse> {
+  try {
+    // Extract courseId from URL
+    const url = new URL(request.url);
+    const pathSegments = url.pathname.split('/');
+    const courseId = pathSegments[pathSegments.indexOf('courses') + 1];
+    
+    if (!courseId) {
+      return new NextResponse("Course ID is required", { status: 400 });
+    }
+
+    const user = await currentUser();
+    if (!user?.id) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
+    // Rest of your existing implementation remains the same...
     const course = await db.course.findUnique({
       where: {
         id: courseId,
@@ -31,7 +40,7 @@ export async function POST(
       where: {
         userId_courseId: {
           userId: user.id,
-          courseId: course.id,
+          courseId,
         },
       },
     });
@@ -91,7 +100,7 @@ export async function POST(
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?canceled=1`,
       metadata: {
-        courseId: course.id,
+        courseId,
         userId: user.id,
       },
     });

@@ -11,13 +11,13 @@ const SearchInput = () => {
     const router = useRouter()
     const pathname = usePathname()
     const debouncedValue = useDebounce(Value)
-    const currentCatagarieId = searchParams.get("catageryId");
+    const currentCatagarieId = searchParams.get("categoryId");
 
     useEffect(() => {
         const url = qs.stringifyUrl({
             url: pathname,
             query: {
-                catageryId: currentCatagarieId,
+                categoryId: currentCatagarieId,
                 title: debouncedValue
             }
         }, { skipNull: true, skipEmptyString: true });

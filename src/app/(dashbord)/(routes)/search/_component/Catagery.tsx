@@ -2,7 +2,13 @@
 import React from 'react'
 import { FcEngineering, FcMultipleDevices, FcFilmReel, FcOldTimeCamera, FcMusic, FcSalesPerformance, FcSportsMode } from 'react-icons/fc'
 import CatageryItem from './CatageryItem'
-const Catagery = ({ item }) => {
+import { Category } from '@prisma/client'
+
+
+interface Props{
+    items:Category[]
+}
+const Catagery = ({ items }:Props) => {
 
     const iconMap = {
         "Engineering": FcEngineering,
@@ -16,7 +22,7 @@ const Catagery = ({ item }) => {
 
     return (
         <div className='flex items-center gap-x-2 overflow-x-auto pb-2'>
-            {item.map((item) => (
+            {items.map((item) => (
                 <CatageryItem key={item.id}  iconMap={iconMap} item={item} />
 
             ))}

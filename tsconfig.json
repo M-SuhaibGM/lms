@@ -1,35 +1,43 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "es2020",
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
     "noEmit": true,
-    "incremental": true,
     "module": "esnext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "resolveJsonModule": true
   },
   "include": [
     "next-env.d.ts",
-    ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/middleware.js"
-, "src/app/(dashbord)/(routes)/teacher/create/page.jsx", "src/components/ui/fileUploder.js", "src/app/api/uploadthing/core.js", "src/app/api/uploadthing/route.js", "src/lib/uploadthing.js", "src/app/(dashbord)/_components/UploadImageForm.jsx", "src/app/(dashbord)/(routes)/search/_component/Catagery.jsx", "hooks/Debounce.jsx", "actions/get-course.ts", "actions/get-chapter.ts", "src/app/api/courses/[courseId]/checkout/route.ts", "src/app/(course)/courses/[courseId]/chapters/[chapterid]/page.jsx"  ],
+    "**/*.js",
+    "**/*.jsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
