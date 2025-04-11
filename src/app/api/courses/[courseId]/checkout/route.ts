@@ -5,9 +5,9 @@ import Stripe from "stripe";
 import stripe from "../../../../../lib/stripe";
 
 export async function POST(
-  req: Request,
+  request: Request,
   { params }: { params: { courseId: string } }
-) {
+): Promise<NextResponse> {
   try {
     const { courseId } = params;
     const user = await currentUser();
@@ -98,7 +98,7 @@ export async function POST(
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error("[COURSE_CHECKOUT]", error);
-    return new NextResponse("Internal Error", { status: 500 });
+    console.error("[COURSE_CHECKOUT_ERROR]", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
